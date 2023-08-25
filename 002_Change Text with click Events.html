@@ -29,9 +29,7 @@
 				border: 1px solid #0f5897;
 			}
 		</style>
-		<title>
-			Handle Click Events with JavaScript using the onclick property
-		</title>
+		<title>Change Text with click Events</title>
 	</head>
 	<body>
 		<h1>Cat Photo Finder</h1>
@@ -47,9 +45,10 @@
 		></script>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-				// Add your code below this line
-				document.getElementById('getMessage').onclick = () => {};
-				// Add your code above this line
+				document.getElementById('getMessage').onclick = () => {
+					document.getElementsByClassName('message')[0].textContent =
+						'Here is the message';
+				};
 			});
 		</script>
 	</body>
