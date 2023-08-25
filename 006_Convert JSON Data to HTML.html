@@ -29,22 +29,30 @@
 				border: 1px solid #0f5897;
 			}
 		</style>
-		<title>Get JSON with the JavaScript XMLHttpRequest Method</title>
+		<title>Convert JSON Data to HTML</title>
 	</head>
 	<body>
 		<script>
-			document.addEventListener('DOMContentLoaded', function () {
+			document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById('getMessage').onclick = () => {
-					// Add your code below this line
 					const req = new XMLHttpRequest();
 					req.open('GET', '/json/cats.json', true);
 					req.send();
-					req.onload = () => {
+					req.onload = function () {
 						const json = JSON.parse(req.responseText);
-						document.getElementsByClassName('message')[0].innerHTML =
-							JSON.stringify(json);
+						let html = '';
+						// Add your code below this line
+						json.forEach((val) => {
+							let keys = Object.keys(val);
+							html += `<div class ="cat">`;
+							keys.forEach((key) => {
+								html += `<strong>${key}</strong>:${val[key]}<br>`;
+							});
+							html += `</div><br>`;
+						});
+						// Add your code above this line
+						document.getElementsByClassName('message')[0].innerHTML = html;
 					};
-					// Add your code above this line
 				};
 			});
 		</script>
