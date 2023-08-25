@@ -29,7 +29,7 @@
 				border: 1px solid #0f5897;
 			}
 		</style>
-		<title>Get JSON with the JavaScript XMLHttpRequest Method</title>
+		<title>Pre-filter JSON to Get the Data You Need</title>
 	</head>
 	<body>
 		<h1>Cat Photo Finder</h1>
@@ -39,17 +39,31 @@
 		</p>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {
-				document.getElementById('getMessage').onclick = () => {
-					// Add your code below this line
+				document.getElementById('getMessage').onclick = function () {
 					const req = new XMLHttpRequest();
 					req.open('GET', '/json/cats.json', true);
 					req.send();
-					req.onload = () => {
-						const json = JSON.parse(req.responseText);
-						document.getElementsByClassName('message')[0].innerHTML =
-							JSON.stringify(json);
+					req.onload = function () {
+						let json = JSON.parse(req.responseText);
+						let html = '';
+						// Add your code below this line
+						json = json.filter((i) => i.id !== 1);
+						// Add your code above this line
+						json.forEach(function (val) {
+							html += "<div class = 'cat'>";
+
+							html +=
+								"<img src = '" +
+								val.imageLink +
+								"' " +
+								"alt='" +
+								val.altText +
+								"'>";
+
+							html += '</div>';
+						});
+						document.getElementsByClassName('message')[0].innerHTML = html;
 					};
-					// Add your code above this line
 				};
 			});
 		</script>
